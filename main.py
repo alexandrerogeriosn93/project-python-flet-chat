@@ -94,7 +94,7 @@ def main(page: ft.Page):
                 msg = ChatMessage(message)
             case "login_message":
                 msg = ft.Text(
-                    message.text, italic=True, color=ft.colors.BLACK45, size=12
+                    message.text, italic=True, color=ft.colors.GREEN_ACCENT, size=12
                 )
 
         chat.controls.append(msg)
