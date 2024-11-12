@@ -75,5 +75,18 @@ def main(page: ft.Page):
             )
             page.update()
 
+    def send_message_click(e):
+        if new_message.value != "":
+            page.pubsub.send_all(
+                Message(
+                    page.session.get("user_name"),
+                    new_message.value,
+                    message_type="chat_message",
+                )
+            )
+            new_message.value = ""
+            new_message.focus()
+            page.update()
+
 
 ft.app(target=main)
