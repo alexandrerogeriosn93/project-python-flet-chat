@@ -88,5 +88,19 @@ def main(page: ft.Page):
             new_message.focus()
             page.update()
 
+    def on_message(message: Message):
+        match message.message_type:
+            case "chat_message":
+                msg = ChatMessage(message)
+            case "login_message":
+                msg = ft.Text(
+                    message.text, italic=True, color=ft.colors.BLACK45, size=12
+                )
+
+        chat.controls.append(msg)
+        page.update()
+
+    page.pubsub.subscribe(on_message)
+
 
 ft.app(target=main)
