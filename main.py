@@ -58,5 +58,22 @@ def main(page: ft.Page):
     page.title = "Flet Chat"
     page.horizontal_alignment = ft.CrossAxisAlignment.STRETCH
 
+    def join_chat_click(e):
+        if not join_user_name.value:
+            join_user_name.text = "Nome não pode estar em branco."
+            join_user_name.update()
+        else:
+            page.session.set("user_name", join_user_name.value)
+            page.dialog.open = False
+            new_message.prefix = ft.Text(f"{join_user_name.value}:")
+            page.pubsub.send_all(
+                Message(
+                    user_name=join_user_name.value,
+                    text=f"{join_user_name.value} entrou no chat",
+                    message_type="login_message",
+                )
+            )
+            page.update()
+
 
 ft.app(target=main)
