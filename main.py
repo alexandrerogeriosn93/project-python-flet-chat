@@ -102,5 +102,53 @@ def main(page: ft.Page):
 
     page.pubsub.subscribe(on_message)
 
+    join_user_name = ft.TextField(
+        label="Digite o seu nome para entrar no chat.",
+        autofocus=True,
+        on_submit=join_chat_click,
+    )
+
+    page.dialog = ft.AlertDialog(
+        open=True,
+        modal=True,
+        title=ft.Text("Bem vindo!"),
+        content=ft.Column([join_user_name], width=300, height=70, tight=True),
+        actions=[ft.ElevatedButton(text="Entre no chat", on_click=join_chat_click)],
+        actions_alignment=ft.MainAxisAlignment.END,
+    )
+
+    chat = ft.ListView(expand=True, spacing=10, auto_scroll=True)
+
+    new_message = ft.TextField(
+        hint_text="Escreva a mensagem...",
+        autofocus=True,
+        shift_enter=True,
+        min_lines=1,
+        max_lines=5,
+        filled=True,
+        expand=True,
+        on_submit=send_message_click,
+    )
+
+    page.add(
+        ft.Container(
+            content=chat,
+            border=ft.border.all(1, ft.colors.OUTLINE),
+            border_radius=5,
+            padding=10,
+            expand=True,
+        ),
+        ft.Row(
+            [
+                new_message,
+                ft.IconButton(
+                    icon=ft.icons.SEND_ROUNDED,
+                    tooltip="Envie a sua mensagem",
+                    on_click=send_message_click,
+                ),
+            ]
+        ),
+    )
+
 
 ft.app(target=main)
