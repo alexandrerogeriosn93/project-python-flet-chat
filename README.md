@@ -41,10 +41,10 @@ pip install -r requirements.txt
 
 ### 4. Execute the Project
 
-To run the project in web mode on a specific port:
+To run the project in web mode:
 
 ```bash
-flet run --web --port 57285 main.py
+flet run --web main.py
 ```
 
 The application will be available locally at: [http://127.0.0.1:57285/](http://127.0.0.1:57285/)
